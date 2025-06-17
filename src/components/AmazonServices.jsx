@@ -4,10 +4,37 @@ import { CheckCircle, Star, TrendingUp, Users, Award, ArrowRight, Zap, Target, S
 const AmazonServices = () => {
   const [activePackage, setActivePackage] = useState(1);
   const [isVisible, setIsVisible] = useState(false);
+  const [selectedPackage, setSelectedPackage] = useState(null);
+  const [showQuoteForm, setShowQuoteForm] = useState(false);
+  const [timeline, setTimeline] = useState('1week');
+  const [asapPricing, setAsapPricing] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
+
+  const handlePackageSelect = (pkg) => {
+    setSelectedPackage(pkg);
+    setShowQuoteForm(true);
+    setTimeline('1week'); // Default to 1 week
+    setAsapPricing(false);
+    // Scroll to form
+    setTimeout(() => {
+      document.getElementById('quote')?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  };
+
+  const handleTimelineChange = (newTimeline) => {
+    setTimeline(newTimeline);
+    setAsapPricing(newTimeline === 'asap');
+  };
+
+  const calculatePrice = (basePrice) => {
+    if (!asapPricing) return basePrice;
+    const numericPrice = parseInt(basePrice.replace('$', ''));
+    const rushPrice = Math.round(numericPrice * 1.5); // 50% increase for ASAP
+    return `$${rushPrice}`;
+  };
 
   const packages = [
     {
@@ -331,7 +358,10 @@ const AmazonServices = () => {
                     </p>
                   </div>
                   
-                  <button className={`w-full bg-gradient-to-r ${pkg.color} text-white py-3 px-6 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105`}>
+                  <button 
+                    onClick={() => handlePackageSelect(pkg)}
+                    className={`w-full bg-gradient-to-r ${pkg.color} text-white py-3 px-6 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105`}
+                  >
                     Choose {pkg.name}
                   </button>
                 </div>
@@ -372,142 +402,152 @@ const AmazonServices = () => {
         </div>
       </section>
 
-      {/* Enhanced Quote Form Section */}
-      <section id="quote" className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Get Your Free Amazon Optimization Quote
-            </h2>
-            <p className="text-xl text-gray-600">
-              Tell us about your Amazon goals and we'll provide a customized solution
-            </p>
-          </div>
-          
-          <div className="bg-white rounded-2xl shadow-2xl p-8 lg:p-12">
-            <form className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
+      {/* Enhanced Quote Form Section - Only show when package is selected */}
+      {showQuoteForm && (
+        <section id="quote" className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                Complete Your {selectedPackage?.name} Order
+              </h2>
+              <p className="text-xl text-gray-600">
+                You've selected the {selectedPackage?.name} - {selectedPackage?.subtitle}
+              </p>
+              {asapPricing && (
+                <div className="mt-4 p-4 bg-orange-100 border border-orange-300 rounded-lg">
+                  <p className="text-orange-800 font-semibold">
+                    🚀 ASAP Rush Order: {calculatePrice(selectedPackage?.price)} (50% rush fee applied)
+                  </p>
+                </div>
+              )}
+            </div>
+            
+            <div className="bg-white rounded-2xl shadow-2xl p-8 lg:p-12">
+              <form className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                      Full Name *
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                      placeholder="Your full name"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                      Email Address *
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                      placeholder="your@email.com"
+                    />
+                  </div>
+                </div>
+                
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                    Full Name *
+                  <label htmlFor="business" className="block text-sm font-medium text-gray-700 mb-2">
+                    Business/Brand Name
                   </label>
                   <input
                     type="text"
-                    id="name"
-                    name="name"
-                    required
+                    id="business"
+                    name="business"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-                    placeholder="Your full name"
+                    placeholder="Your business or brand name"
                   />
                 </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                    Email Address *
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-                    placeholder="your@email.com"
-                  />
+                
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="package" className="block text-sm font-medium text-gray-700 mb-2">
+                      Selected Package *
+                    </label>
+                    <input
+                      type="text"
+                      id="package"
+                      name="package"
+                      value={`${selectedPackage?.name} (${asapPricing ? calculatePrice(selectedPackage?.price) : selectedPackage?.price})`}
+                      readOnly
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-700"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="products" className="block text-sm font-medium text-gray-700 mb-2">
+                      Number of Products/ASINs
+                    </label>
+                    <input
+                      type="number"
+                      id="products"
+                      name="products"
+                      min="1"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                      placeholder="How many products need optimization?"
+                    />
+                  </div>
                 </div>
-              </div>
-              
-              <div>
-                <label htmlFor="business" className="block text-sm font-medium text-gray-700 mb-2">
-                  Business/Brand Name
-                </label>
-                <input
-                  type="text"
-                  id="business"
-                  name="business"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-                  placeholder="Your business or brand name"
-                />
-              </div>
-              
-              <div className="grid md:grid-cols-2 gap-6">
+                
                 <div>
-                  <label htmlFor="package" className="block text-sm font-medium text-gray-700 mb-2">
-                    Interested Package *
+                  <label htmlFor="timeline" className="block text-sm font-medium text-gray-700 mb-2">
+                    Project Timeline *
                   </label>
                   <select
-                    id="package"
-                    name="package"
+                    id="timeline"
+                    name="timeline"
+                    value={timeline}
+                    onChange={(e) => handleTimelineChange(e.target.value)}
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
                   >
-                    <option value="">Select a package</option>
-                    <option value="starter">Starter Package ($199)</option>
-                    <option value="growth">Growth Package ($499)</option>
-                    <option value="elite">Elite Package ($999)</option>
-                    <option value="custom">Custom Solution</option>
-                    <option value="consultation">Consultation First</option>
+                    <option value="1week">Within 1 week (Standard)</option>
+                    <option value="asap">ASAP - Rush Order (+50% fee)</option>
                   </select>
                 </div>
+                
                 <div>
-                  <label htmlFor="products" className="block text-sm font-medium text-gray-700 mb-2">
-                    Number of Products/ASINs
+                  <label htmlFor="details" className="block text-sm font-medium text-gray-700 mb-2">
+                    Project Details & Goals
                   </label>
-                  <input
-                    type="number"
-                    id="products"
-                    name="products"
-                    min="1"
+                  <textarea
+                    id="details"
+                    name="details"
+                    rows={4}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-                    placeholder="How many products need optimization?"
-                  />
+                    placeholder="Tell us about your products, target audience, current challenges, and what you hope to achieve..."
+                  ></textarea>
                 </div>
-              </div>
-              
-              <div>
-                <label htmlFor="timeline" className="block text-sm font-medium text-gray-700 mb-2">
-                  Project Timeline
-                </label>
-                <select
-                  id="timeline"
-                  name="timeline"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-                >
-                  <option value="">Select your timeline</option>
-                  <option value="asap">ASAP (Rush order)</option>
-                  <option value="1week">Within 1 week</option>
-                  <option value="2weeks">Within 2 weeks</option>
-                  <option value="1month">Within 1 month</option>
-                  <option value="flexible">Flexible timeline</option>
-                </select>
-              </div>
-              
-              <div>
-                <label htmlFor="details" className="block text-sm font-medium text-gray-700 mb-2">
-                  Project Details & Goals
-                </label>
-                <textarea
-                  id="details"
-                  name="details"
-                  rows={4}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-                  placeholder="Tell us about your products, target audience, current challenges, and what you hope to achieve..."
-                ></textarea>
-              </div>
-              
-              <div className="text-center">
-                <button
-                  type="submit"
-                  className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
-                >
-                  Get My Free Quote
-                </button>
-                <p className="text-sm text-gray-500 mt-3">
-                  We'll respond within 24 hours with a detailed proposal
-                </p>
-              </div>
-            </form>
+                
+                <div className="text-center">
+                  <button
+                    type="submit"
+                    className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
+                  >
+                    Complete Order - {asapPricing ? calculatePrice(selectedPackage?.price) : selectedPackage?.price}
+                  </button>
+                  <p className="text-sm text-gray-500 mt-3">
+                    We'll respond within 24 hours with a detailed proposal
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setShowQuoteForm(false)}
+                    className="mt-4 text-gray-500 hover:text-gray-700 underline"
+                  >
+                    ← Back to Packages
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   );
 };
