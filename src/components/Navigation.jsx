@@ -18,6 +18,7 @@ const Navigation = () => {
     { name: 'Products', path: '/products' },
     { name: 'Merch', path: '/merch' }, // Added Merch link
     { name: 'Custom Designer', path: '/custom-designer' },
+    { name: 'Amazon Services', path: '/amazon-services' }, // Added Amazon Services link
     { name: 'Support', path: '/support' }
   ]
 

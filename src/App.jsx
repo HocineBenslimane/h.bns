@@ -12,6 +12,7 @@ import Legal from './components/Legal'
 import PaymentTerms from './components/PaymentTerms'
 import QuoteForm from './components/QuoteForm'
 import Merch from './components/Merch' // Import the new Merch component
+import AmazonServices from './components/AmazonServices' // Import the new Amazon Services component
 import Footer from './components/Footer'
 import './App.css'
 
@@ -349,6 +350,7 @@ function App() {
           <Route path="/" element={<Hero />} />
           <Route path="/products" element={<Products />} />
           <Route path="/custom-designer" element={<CustomDesigner />} />
+          <Route path="/amazon-services" element={<AmazonServices />} />
           <Route path="/support" element={<Support />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/policies" element={<Policies />} />
