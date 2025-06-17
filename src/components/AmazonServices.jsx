@@ -8,6 +8,8 @@ const AmazonServices = () => {
   const [showQuoteForm, setShowQuoteForm] = useState(false);
   const [timeline, setTimeline] = useState('1week');
   const [asapPricing, setAsapPricing] = useState(false);
+  const [isCustomQuote, setIsCustomQuote] = useState(false);
+  const [productCount, setProductCount] = useState(1);
 
   useEffect(() => {
     setIsVisible(true);
@@ -18,10 +20,46 @@ const AmazonServices = () => {
     setShowQuoteForm(true);
     setTimeline('1week'); // Default to 1 week
     setAsapPricing(false);
+    setIsCustomQuote(false);
+    
+    // Set product count based on package
+    const asinCount = getAsinCountFromPackage(pkg);
+    setProductCount(asinCount);
+    
     // Scroll to form
     setTimeout(() => {
       document.getElementById('quote')?.scrollIntoView({ behavior: 'smooth' });
     }, 100);
+  };
+
+  const handleCustomQuote = () => {
+    const customPackage = {
+      id: 'custom',
+      name: "Custom Solution",
+      subtitle: "Tailored to Your Needs",
+      price: "Custom Pricing",
+      description: "Fully customized solution for your specific requirements"
+    };
+    
+    setSelectedPackage(customPackage);
+    setShowQuoteForm(true);
+    setTimeline('1week');
+    setAsapPricing(false);
+    setIsCustomQuote(true);
+    setProductCount(1); // Default to 1, but user can change
+    
+    // Scroll to form
+    setTimeout(() => {
+      document.getElementById('quote')?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  };
+
+  const getAsinCountFromPackage = (pkg) => {
+    // Extract ASIN count from package features
+    if (pkg.id === 0) return 1; // Starter: 1 ASIN
+    if (pkg.id === 1) return 3; // Growth: up to 3 ASINs
+    if (pkg.id === 2) return 5; // Elite: up to 5 ASINs
+    return 1; // Default
   };
 
   const handleTimelineChange = (newTimeline) => {
@@ -30,7 +68,7 @@ const AmazonServices = () => {
   };
 
   const calculatePrice = (basePrice) => {
-    if (!asapPricing) return basePrice;
+    if (!asapPricing || basePrice === "Custom Pricing") return basePrice;
     const numericPrice = parseInt(basePrice.replace('$', ''));
     const rushPrice = Math.round(numericPrice * 1.5); // 50% increase for ASAP
     return `$${rushPrice}`;
@@ -375,10 +413,13 @@ const AmazonServices = () => {
             <p className="text-lg mb-6 max-w-2xl mx-auto">
               For unique projects, extensive product catalogs, or specific requirements, we offer fully customized solutions tailored to your vision.
             </p>
-            <a href="#quote" className="inline-flex items-center bg-white text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+            <button 
+              onClick={handleCustomQuote}
+              className="inline-flex items-center bg-white text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+            >
               Get Custom Quote
               <ArrowRight className="ml-2 w-5 h-5" />
-            </a>
+            </button>
           </div>
         </div>
       </section>
@@ -489,9 +530,17 @@ const AmazonServices = () => {
                       id="products"
                       name="products"
                       min="1"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                      value={productCount}
+                      onChange={(e) => setProductCount(parseInt(e.target.value) || 1)}
+                      readOnly={!isCustomQuote}
+                      className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 ${!isCustomQuote ? 'bg-gray-50 text-gray-700' : ''}`}
                       placeholder="How many products need optimization?"
                     />
+                    {!isCustomQuote && (
+                      <p className="text-xs text-gray-500 mt-1">
+                        Based on selected package. For custom quantities, use "Get Custom Quote"
+                      </p>
+                    )}
                   </div>
                 </div>
                 
