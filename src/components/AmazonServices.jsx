@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { CheckCircle, Star, TrendingUp, Users, Award, ArrowRight, Zap, Target, Shield } from 'lucide-react';
 
+// Amazon Services component with SEO optimization
 const AmazonServices = () => {
   const [activePackage, setActivePackage] = useState(1);
   const [isVisible, setIsVisible] = useState(false);
@@ -13,6 +14,15 @@ const AmazonServices = () => {
 
   useEffect(() => {
     setIsVisible(true);
+    
+    // Add meta tags for SEO
+    document.title = "Amazon SEO Copywriting & Brand Storefront Design Services | H.BNS LLC";
+    
+    // Update meta description if it exists
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute("content", "Professional Amazon copywriting services and brand storefront design to boost your product visibility, conversion rates, and sales. SEO-optimized product titles, bullet points, and descriptions.");
+    }
   }, []);
 
   const handlePackageSelect = (pkg) => {
@@ -78,13 +88,13 @@ const AmazonServices = () => {
     {
       id: 0,
       name: "Starter Package",
-      subtitle: "Essential Visibility",
+      subtitle: "Essential Amazon SEO Visibility",
       price: "$199",
       description: "Perfect for new sellers or single product optimization",
       features: [
-        "1 SEO-optimized Product Title",
-        "5 Benefit-driven Bullet Points",
-        "1 Engaging Product Description",
+        "1 SEO-optimized Amazon Product Title",
+        "5 Benefit-driven Amazon Bullet Points",
+        "1 Engaging Amazon Product Description",
         "Keyword Research for 1 ASIN"
       ],
       ideal: "Single product optimization, new product launches, budget-conscious sellers",
@@ -94,16 +104,16 @@ const AmazonServices = () => {
     {
       id: 1,
       name: "Growth Package",
-      subtitle: "Enhanced Presence",
+      subtitle: "Enhanced Amazon Presence",
       price: "$499",
       description: "Expand your reach with multiple product optimization",
       features: [
-        "Up to 3 SEO-optimized Product Titles",
-        "Up to 15 Benefit-driven Bullet Points",
-        "Up to 3 Engaging Product Descriptions",
+        "Up to 3 SEO-optimized Amazon Product Titles",
+        "Up to 15 Benefit-driven Amazon Bullet Points",
+        "Up to 3 Engaging Amazon Product Descriptions",
         "In-depth Keyword Research for up to 3 ASINs",
-        "Basic Brand Storefront Header Design",
-        "2 A+ Content Modules"
+        "Basic Amazon Brand Storefront Header Design",
+        "2 Amazon A+ Content Modules"
       ],
       ideal: "Growing brands with multiple products, stronger brand presence",
       color: "from-purple-500 to-pink-600",
@@ -117,14 +127,14 @@ const AmazonServices = () => {
       price: "$999",
       description: "Comprehensive solution for market leadership",
       features: [
-        "Up to 5 SEO-optimized Product Titles",
-        "Up to 25 Benefit-driven Bullet Points",
-        "Up to 5 Engaging Product Descriptions",
+        "Up to 5 SEO-optimized Amazon Product Titles",
+        "Up to 25 Benefit-driven Amazon Bullet Points",
+        "Up to 5 Engaging Amazon Product Descriptions",
         "Advanced Keyword Research for up to 5 ASINs",
-        "Full Custom Brand Storefront Design",
-        "5 A+ Content Modules",
-        "Competitor Analysis",
-        "CRO Consultation"
+        "Full Custom Amazon Brand Storefront Design",
+        "5 Amazon A+ Content Modules",
+        "Amazon Competitor Analysis",
+        "Amazon CRO Consultation"
       ],
       ideal: "Established brands, market leaders, complete Amazon overhaul",
       color: "from-orange-500 to-red-600",
@@ -158,14 +168,14 @@ const AmazonServices = () => {
             </div>
             
             <h1 className="text-4xl md:text-7xl font-bold mb-6 leading-tight">
-              Transform Your Amazon
+              Transform Your Amazon Listings
               <span className="block bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
-                Into a Sales Machine
+                Into High-Converting Sales Machines
               </span>
             </h1>
             
             <p className="text-xl md:text-2xl mb-8 max-w-4xl mx-auto leading-relaxed">
-              Skyrocket your visibility, conversions, and revenue with our proven SEO-optimized copywriting and stunning brand storefront designs
+              Skyrocket your visibility, conversions, and revenue with our SEO-optimized Amazon product titles, bullet points, descriptions, and stunning brand storefront designs
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
@@ -200,10 +210,10 @@ const AmazonServices = () => {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Why Choose H.BNS LLC for Your Amazon Success?
+              Why Choose H.BNS LLC for Your Amazon SEO Success?
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We don't just create content—we engineer Amazon success through strategic optimization and compelling design
+              We don't just create content—we engineer Amazon marketplace success through strategic SEO optimization and compelling brand storefront design
             </p>
           </div>
           
@@ -212,7 +222,7 @@ const AmazonServices = () => {
               {
                 icon: <CheckCircle className="w-8 h-8 text-white" />,
                 title: "Amazon-Centric Expertise",
-                description: "Deep understanding of Amazon's A9 algorithm and marketplace dynamics for maximum visibility",
+                description: "Deep understanding of Amazon's A9 algorithm and marketplace dynamics for maximum product visibility",
                 color: "from-purple-600 to-blue-600"
               },
               {
@@ -248,7 +258,7 @@ const AmazonServices = () => {
               Our Amazon Optimization Services
             </h2>
             <p className="text-xl text-gray-600">
-              Comprehensive solutions to maximize your Amazon performance
+              Comprehensive Amazon SEO solutions to maximize your marketplace performance
             </p>
           </div>
           
@@ -261,7 +271,7 @@ const AmazonServices = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900">High-Converting Amazon Copywriting</h3>
+                <h3 className="text-2xl font-bold text-gray-900">High-Converting Amazon SEO Copywriting</h3>
               </div>
               
               <p className="text-gray-600 mb-8 text-lg leading-relaxed">
@@ -302,7 +312,7 @@ const AmazonServices = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900">Captivating Brand Storefront Design</h3>
+                <h3 className="text-2xl font-bold text-gray-900">Captivating Amazon Brand Storefront Design</h3>
               </div>
               
               <p className="text-gray-600 mb-8 text-lg leading-relaxed">
@@ -312,7 +322,7 @@ const AmazonServices = () => {
               <div className="space-y-6">
                 {[
                   {
-                    title: "Strategic Layout & Navigation",
+                    title: "Strategic Amazon Layout & Navigation",
                     description: "Intuitive designs that guide customers through your product offerings"
                   },
                   {
@@ -320,7 +330,7 @@ const AmazonServices = () => {
                     description: "High-quality, on-brand imagery that captures attention and communicates value"
                   },
                   {
-                    title: "Brand Storytelling",
+                    title: "Amazon Brand Storytelling",
                     description: "Weave your brand narrative to create emotional connections with customers"
                   }
                 ].map((feature, index) => (
@@ -344,10 +354,10 @@ const AmazonServices = () => {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Choose Your Amazon Success Package
+              Choose Your Amazon SEO Success Package
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Transparent pricing, exceptional value, and results that speak for themselves
+              Transparent pricing, exceptional value, and Amazon optimization results that speak for themselves
             </p>
           </div>
           
