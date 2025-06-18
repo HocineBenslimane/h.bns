@@ -353,14 +353,8 @@ function App() {
           <>
             <Hero />
             <Products />
-            <CustomDesigner />
             <Support />
-            <FAQ />
-            <Policies />
-            <Legal />
-            <PaymentTerms />
             <QuoteForm />
-            <Merch />
           </>
         } />
         <Route path="/amazon-services" element={<AmazonServices />} />
