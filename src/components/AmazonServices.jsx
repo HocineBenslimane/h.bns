@@ -7,7 +7,7 @@ const AmazonServices = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState(null);
   const [showQuoteForm, setShowQuoteForm] = useState(false);
-  const [timeline, setTimeline] = useState('1week');
+  const [timeline, setTimeline] = useState('Standard (1-2 weeks)');
   const [asapPricing, setAsapPricing] = useState(false);
   const [isCustomQuote, setIsCustomQuote] = useState(false);
   const [productCount, setProductCount] = useState(1);
@@ -28,7 +28,7 @@ const AmazonServices = () => {
   const handlePackageSelect = (pkg) => {
     setSelectedPackage(pkg);
     setShowQuoteForm(true);
-    setTimeline('1week'); // Default to 1 week
+    setTimeline('Standard (1-2 weeks)'); // Default to Standard
     setAsapPricing(false);
     setIsCustomQuote(false);
     
@@ -53,7 +53,7 @@ const AmazonServices = () => {
     
     setSelectedPackage(customPackage);
     setShowQuoteForm(true);
-    setTimeline('1week');
+    setTimeline('Standard (1-2 weeks)');
     setAsapPricing(false);
     setIsCustomQuote(true);
     setProductCount(1); // Default to 1, but user can change
@@ -74,7 +74,7 @@ const AmazonServices = () => {
 
   const handleTimelineChange = (newTimeline) => {
     setTimeline(newTimeline);
-    setAsapPricing(newTimeline === 'asap');
+    setAsapPricing(newTimeline === 'ASAP (1-3 days) - 50% Rush Fee');
   };
 
   const calculatePrice = (basePrice) => {
@@ -292,8 +292,8 @@ const AmazonServices = () => {
                     title: "Detailed Product Descriptions",
                     description: "Comprehensive descriptions that build trust and overcome objections"
                   }
-                ].map((feature, index) => (
-                  <div key={index} className="flex items-start group/item">
+                ].map((feature, i) => (
+                  <div key={i} className="flex items-start group/item">
                     <div className="w-3 h-3 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full mt-2 mr-4 group-hover/item:scale-125 transition-transform duration-300"></div>
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-1">{feature.title}</h4>
@@ -333,8 +333,8 @@ const AmazonServices = () => {
                     title: "Brand Storytelling",
                     description: "Crafting a compelling narrative that resonates with your target audience"
                   }
-                ].map((feature, index) => (
-                  <div key={index} className="flex items-start group/item">
+                ].map((feature, i) => (
+                  <div key={i} className="flex items-start group/item">
                     <div className="w-3 h-3 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full mt-2 mr-4 group-hover/item:scale-125 transition-transform duration-300"></div>
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-1">{feature.title}</h4>
@@ -348,52 +348,91 @@ const AmazonServices = () => {
         </div>
       </section>
 
-      {/* Packages Section */}
-      <section id="packages" className="py-20 bg-gray-100">
+      {/* Pricing Packages Section */}
+      <section id="packages" className="py-20 bg-gradient-to-br from-blue-50 to-purple-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               Flexible Packages to Suit Your Needs
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600">
               Choose the perfect plan to elevate your Amazon presence, or request a custom solution
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
-            {packages.map((pkg) => (
-              <div key={pkg.id} className={`bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center text-center border-t-4 ${pkg.popular ? 'border-purple-600' : 'border-transparent'} hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1`}>
-                <div className={`w-16 h-16 bg-gradient-to-r ${pkg.color} rounded-full flex items-center justify-center mb-6 text-white`}>
-                  {pkg.icon}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {packages.map((pkg, index) => (
+              <div
+                key={index}
+                className={`relative bg-white rounded-2xl shadow-xl p-8 flex flex-col justify-between transform transition-all duration-300 ${activePackage === pkg.id ? 'scale-105 ring-4 ring-purple-500' : 'hover:scale-102 hover:shadow-2xl'}`}
+              >
+                {pkg.popular && (
+                  <span className="absolute top-0 right-0 bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-2xl">
+                    Most Popular
+                  </span>
+                )}
+                <div>
+                  <div className={`w-16 h-16 bg-gradient-to-r ${pkg.color} rounded-full flex items-center justify-center mx-auto mb-6`}>
+                    {pkg.icon}
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2 text-center">{pkg.name}</h3>
+                  <p className="text-gray-600 text-center mb-4">{pkg.subtitle}</p>
+                  <p className="text-5xl font-bold text-gray-900 text-center mb-6">{pkg.price}</p>
+                  <ul className="space-y-3 mb-8">
+                    {pkg.features.map((feature, i) => (
+                      <li key={i} className="flex items-center text-gray-700">
+                        <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">{pkg.name}</h3>
-                <p className="text-gray-600 mb-4">{pkg.subtitle}</p>
-                <p className="text-4xl font-bold text-gray-900 mb-6">{pkg.price}</p>
-                <ul className="text-gray-700 text-left w-full mb-8 space-y-3">
-                  {pkg.features.map((feature, i) => (
-                    <li key={i} className="flex items-start">
-                      <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
                 <button
                   onClick={() => handlePackageSelect(pkg)}
-                  className={`mt-auto w-full py-3 rounded-lg font-semibold text-lg transition-all duration-300 ${pkg.popular ? 'bg-purple-600 text-white hover:bg-purple-700' : 'bg-gray-200 text-gray-800 hover:bg-gray-300'}`}
+                  className={`w-full py-3 rounded-lg font-semibold text-lg transition-all duration-300
+                    ${activePackage === pkg.id
+                      ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg'
+                      : 'bg-gray-100 text-gray-800 hover:bg-gray-200'}
+                  `}
                 >
                   Select {pkg.name}
                 </button>
               </div>
             ))}
-          </div>
-
-          <div className="text-center">
-            <button
-              onClick={handleCustomQuote}
-              className="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
-            >
-              Request Custom Quote
-            </button>
+            
+            {/* Custom Quote Card */}
+            <div className="relative bg-white rounded-2xl shadow-xl p-8 flex flex-col justify-between transform transition-all duration-300 hover:scale-102 hover:shadow-2xl">
+              <div>
+                <div className="w-16 h-16 bg-gradient-to-r from-gray-400 to-gray-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2 text-center">Custom Solution</h3>
+                <p className="text-gray-600 text-center mb-4">Tailored to Your Unique Needs</p>
+                <p className="text-5xl font-bold text-gray-900 text-center mb-6">Custom Pricing</p>
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-center text-gray-700">
+                    <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
+                    Personalized strategy and deliverables
+                  </li>
+                  <li className="flex items-center text-gray-700">
+                    <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
+                    Flexible scope and pricing
+                  </li>
+                  <li className="flex items-center text-gray-700">
+                    <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
+                    Dedicated expert consultation
+                  </li>
+                </ul>
+              </div>
+              <button
+                onClick={handleCustomQuote}
+                className="w-full py-3 rounded-lg font-semibold text-lg bg-gradient-to-r from-gray-600 to-gray-800 text-white shadow-lg hover:from-gray-500 hover:to-gray-700 transition-all duration-300"
+              >
+                Request Custom Quote
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -403,124 +442,127 @@ const AmazonServices = () => {
         <section id="quote" className="py-20 bg-white">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">
-                {isCustomQuote ? "Request Your Custom Quote" : `Get a Quote for ${selectedPackage?.name}`}
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                {isCustomQuote ? "Complete Your Custom Solution Order" : `Order ${selectedPackage?.name}`}
               </h2>
-              <p className="text-lg text-gray-600">
+              <p className="text-xl text-gray-600">
                 Fill out the form below and we'll get back to you within 24 hours.
               </p>
             </div>
 
-            <form name="amazon-services-quote" method="POST" data-netlify="true" className="space-y-6">
+            <form name="amazon-services-quote" method="POST" data-netlify="true" netlify-honeypot="bot-field" className="space-y-6">
               <input type="hidden" name="form-name" value="amazon-services-quote" />
-              
-              {selectedPackage && (
-                <div className="mb-6 p-4 bg-blue-50 border-l-4 border-blue-500 text-blue-800 rounded-lg">
+              <div hidden>
+                <label>
+                  Don’t fill this out if you’re human: <input name="bot-field" />
+                </label>
+              </div>
+
+              {selectedPackage && !isCustomQuote && (
+                <div className="bg-blue-50 border-l-4 border-blue-400 text-blue-800 p-4 rounded-md mb-6">
                   <p className="font-semibold">Selected Package: {selectedPackage.name}</p>
                   <p>Price: {calculatePrice(selectedPackage.price)}</p>
-                  {isCustomQuote && (
-                    <p className="text-sm mt-2">You've selected a custom quote. Please provide details below.</p>
-                  )}
                 </div>
               )}
 
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+                <label htmlFor="name" className="block text-lg font-medium text-gray-700">Name</label>
                 <input
                   type="text"
                   name="name"
                   id="name"
-                  autoComplete="name"
                   required
-                  className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-lg"
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+                <label htmlFor="email" className="block text-lg font-medium text-gray-700">Email</label>
                 <input
                   type="email"
                   name="email"
                   id="email"
-                  autoComplete="email"
                   required
-                  className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-lg"
                 />
               </div>
 
               <div>
-                <label htmlFor="business" className="block text-sm font-medium text-gray-700">Business Name (Optional)</label>
+                <label htmlFor="business" className="block text-lg font-medium text-gray-700">Business Name (Optional)</label>
                 <input
                   type="text"
                   name="business"
                   id="business"
-                  className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-lg"
                 />
               </div>
 
-              {!isCustomQuote && selectedPackage && (
-                <div>
-                  <label htmlFor="productCount" className="block text-sm font-medium text-gray-700">Number of ASINs/Products</label>
-                  <input
-                    type="number"
-                    name="productCount"
-                    id="productCount"
-                    min="1"
-                    value={productCount}
-                    onChange={(e) => setProductCount(e.target.value)}
-                    required
-                    className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                  />
-                </div>
-              )}
+              <div>
+                <label htmlFor="productCount" className="block text-lg font-medium text-gray-700">Number of ASINs/Products</label>
+                <input
+                  type="number"
+                  name="productCount"
+                  id="productCount"
+                  required
+                  value={productCount}
+                  onChange={(e) => setProductCount(e.target.value)}
+                  readOnly={!isCustomQuote}
+                  className={`mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-lg ${!isCustomQuote ? 'bg-gray-100 cursor-not-allowed' : ''}`}
+                />
+                {!isCustomQuote && (
+                  <p className="mt-2 text-sm text-gray-500">Based on selected package. For custom quantities, use 'Request Custom Quote'</p>
+                )}
+              </div>
 
               <div>
-                <label htmlFor="timeline" className="block text-sm font-medium text-gray-700">Preferred Timeline</label>
+                <label htmlFor="timeline" className="block text-lg font-medium text-gray-700">Preferred Timeline</label>
                 <select
-                  id="timeline"
                   name="timeline"
+                  id="timeline"
                   value={timeline}
                   onChange={(e) => handleTimelineChange(e.target.value)}
-                  className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  required
+                  className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-lg"
                 >
-                  <option value="1week">Standard (1-2 weeks)</option>
-                  <option value="2weeks">Extended (2-4 weeks)</option>
-                  <option value="asap">ASAP (1-3 days) - 50% Rush Fee</option>
+                  <option value="Standard (1-2 weeks)">Standard (1-2 weeks)</option>
+                  <option value="ASAP (1-3 days) - 50% Rush Fee">ASAP (1-3 days) - 50% Rush Fee</option>
                 </select>
               </div>
 
               <div>
-                <label htmlFor="details" className="block text-sm font-medium text-gray-700">Project Details</label>
+                <label htmlFor="details" className="block text-lg font-medium text-gray-700">Project Details</label>
                 <textarea
-                  id="details"
                   name="details"
+                  id="details"
                   rows="5"
                   required
-                  className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-lg"
                 ></textarea>
               </div>
 
-              <button
-                type="submit"
-                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-              >
-                Submit Quote Request
-              </button>
+              <div>
+                <button
+                  type="submit"
+                  className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-semibold text-white bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+                >
+                  Submit Quote Request
+                </button>
+              </div>
             </form>
           </div>
         </section>
       )}
 
       {/* Call to Action */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-center">
+      <section className="py-20 bg-gradient-to-r from-purple-700 to-indigo-800 text-white text-center">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
             Ready to Dominate Your Amazon Niche?
           </h2>
-          <p className="text-xl md:text-2xl mb-8 leading-relaxed">
+          <p className="text-xl md:text-2xl mb-8">
             Let H.BNS LLC transform your Amazon presence with expert SEO copywriting and stunning brand storefront design.
           </p>
-          <a href="#quote" className="bg-white text-purple-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-200 transition-all duration-300 transform hover:scale-105 shadow-lg">
+          <a href="#quote" className="inline-block bg-white text-purple-700 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg">
             Get Your Free Consultation
           </a>
         </div>
