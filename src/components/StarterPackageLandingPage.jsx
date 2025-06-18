@@ -308,11 +308,11 @@ const StarterPackageLandingPage = () => {
                 </div>
 
                 <div className="mb-6">
-                  <label htmlFor="productUrl" className="block text-sm font-medium text-gray-700 mb-2">Amazon Product URL *</label>
+                  <label htmlFor="amazonUrl" className="block text-sm font-medium text-gray-700 mb-2">Amazon Product URL *</label>
                   <input 
                     type="url" 
-                    name="productUrl" 
-                    id="productUrl" 
+                    name="amazonUrl" 
+                    id="amazonUrl" 
                     required 
                     className="w-full border border-gray-300 rounded-lg shadow-sm py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" 
                     placeholder="https://www.amazon.com/dp/YOUR-ASIN"
