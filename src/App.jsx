@@ -357,6 +357,15 @@ function App() {
             <QuoteForm />
           </>
         } />
+        <Route path="/products" element={<Products />} />
+        <Route path="/merch" element={<Merch />} />
+        <Route path="/custom-designer" element={<CustomDesigner />} />
+        <Route path="/support" element={<Support />} />
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="/policies" element={<Policies />} />
+        <Route path="/legal" element={<Legal />} />
+        <Route path="/payment-terms" element={<PaymentTerms />} />
+        <Route path="/quote" element={<QuoteForm />} />
         <Route path="/amazon-services" element={<AmazonServices />} />
         <Route path="/starter-package" element={<StarterPackageLandingPage />} />
         <Route path="/growth-package" element={<GrowthPackageLandingPage />} />
