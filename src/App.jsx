@@ -14,6 +14,9 @@ import QuoteForm from './components/QuoteForm'
 import Merch from './components/Merch' // Import the new Merch component
 import AmazonServices from './components/AmazonServices' // Import the new Amazon Services component
 import Footer from './components/Footer'
+import StarterPackageLandingPage from './components/StarterPackageLandingPage';
+import GrowthPackageLandingPage from './components/GrowthPackageLandingPage';
+import ElitePackageLandingPage from './components/ElitePackageLandingPage';
 import './App.css'
 
 function App() {
@@ -76,7 +79,7 @@ function App() {
         switch (params.userInput) {
           case "Get a Quote": return "quote";
           case "Timeline Info": return "timeline";
-          case "Back to Services": return "services";
+          case "Back to Pricing": return "pricing";
           case "Main Menu": return "start";
           default: return "clarify";
         }
@@ -343,28 +346,33 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen bg-background">
-        <Navigation />
-        <ChatBot flow={flow} settings={settings} />
-        <Routes>
-          <Route path="/" element={<Hero />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/custom-designer" element={<CustomDesigner />} />
-          <Route path="/amazon-services" element={<AmazonServices />} />
-          <Route path="/support" element={<Support />} />
-          <Route path="/faq" element={<FAQ />} />
-          <Route path="/policies" element={<Policies />} />
-          <Route path="/legal" element={<Legal />} />
-          <Route path="/payment-terms" element={<PaymentTerms />} />
-          <Route path="/get-a-quote" element={<QuoteForm />} />
-          <Route path="/merch" element={<Merch />} /> {/* Add route for Merch */}
-        </Routes>
-        <Footer />
-      </div>
+      <Navigation />
+      <Routes>
+        <Route path="/" element={
+          <>
+            <Hero />
+            <Products />
+            <CustomDesigner />
+            <Support />
+            <FAQ />
+            <Policies />
+            <Legal />
+            <PaymentTerms />
+            <QuoteForm />
+            <Merch />
+          </>
+        } />
+        <Route path="/amazon-services" element={<AmazonServices />} />
+        <Route path="/starter-package" element={<StarterPackageLandingPage />} />
+        <Route path="/growth-package" element={<GrowthPackageLandingPage />} />
+        <Route path="/elite-package" element={<ElitePackageLandingPage />} />
+      </Routes>
+      <Footer />
+      <ChatBot settings={settings} flow={flow} />
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;
 
 
