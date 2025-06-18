@@ -225,7 +225,13 @@ const StarterPackageLandingPage = () => {
                 </p>
               </div>
               
-              <form name="amazon-services-starter-package" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+              <form 
+                name="amazon-services-starter-package" 
+                method="POST" 
+                data-netlify="true" 
+                netlify-honeypot="bot-field"
+                action="/success"
+              >
                 <input type="hidden" name="form-name" value="amazon-services-starter-package" />
                 <input type="hidden" name="package" value={selectedPackageName} />
                 <p className="hidden">

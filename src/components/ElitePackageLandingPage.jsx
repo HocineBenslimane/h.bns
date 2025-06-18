@@ -329,7 +329,13 @@ const ElitePackageLandingPage = () => {
                 </p>
               </div>
               
-              <form name="amazon-services-elite-package" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+              <form 
+                name="amazon-services-elite-package" 
+                method="POST" 
+                data-netlify="true" 
+                netlify-honeypot="bot-field"
+                action="/success"
+              >
                 <input type="hidden" name="form-name" value="amazon-services-elite-package" />
                 <input type="hidden" name="package" value={selectedPackageName} />
                 <p className="hidden">

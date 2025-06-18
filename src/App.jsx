@@ -17,6 +17,7 @@ import Footer from './components/Footer'
 import StarterPackageLandingPage from './components/StarterPackageLandingPage';
 import GrowthPackageLandingPage from './components/GrowthPackageLandingPage';
 import ElitePackageLandingPage from './components/ElitePackageLandingPage';
+import SuccessPage from './components/SuccessPage';
 import './App.css'
 
 function App() {
@@ -366,6 +367,7 @@ function App() {
         <Route path="/starter-package" element={<StarterPackageLandingPage />} />
         <Route path="/growth-package" element={<GrowthPackageLandingPage />} />
         <Route path="/elite-package" element={<ElitePackageLandingPage />} />
+        <Route path="/success" element={<SuccessPage />} />
       </Routes>
       <Footer />
       <ChatBot settings={settings} flow={flow} />
