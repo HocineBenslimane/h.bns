@@ -322,16 +322,16 @@ const AmazonServices = () => {
               <div className="space-y-6">
                 {[
                   {
-                    title: "Strategic Amazon Layout & Navigation",
-                    description: "Intuitive designs that guide customers through your product offerings"
+                    title: "Custom Storefront Layouts",
+                    description: "Visually stunning and user-friendly storefronts that reflect your brand identity"
                   },
                   {
-                    title: "Visually Stunning Graphics",
-                    description: "High-quality, on-brand imagery that captures attention and communicates value"
+                    title: "Enhanced Brand Content (A+ Content)",
+                    description: "Rich media and detailed product information to drive conversions"
                   },
                   {
-                    title: "Amazon Brand Storytelling",
-                    description: "Weave your brand narrative to create emotional connections with customers"
+                    title: "Brand Storytelling",
+                    description: "Crafting a compelling narrative that resonates with your target audience"
                   }
                 ].map((feature, index) => (
                   <div key={index} className="flex items-start group/item">
@@ -348,268 +348,194 @@ const AmazonServices = () => {
         </div>
       </section>
 
-      {/* Enhanced Pricing Packages Section */}
-      <section id="packages" className="py-20 bg-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-50 to-blue-50 opacity-50"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Packages Section */}
+      <section id="packages" className="py-20 bg-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Choose Your Amazon SEO Success Package
+              Flexible Packages to Suit Your Needs
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Transparent pricing, exceptional value, and Amazon optimization results that speak for themselves
+              Choose the perfect plan to elevate your Amazon presence, or request a custom solution
             </p>
           </div>
-          
-          <div className="grid lg:grid-cols-3 gap-8 mb-12">
-            {packages.map((pkg, index) => (
-              <div 
-                key={pkg.id}
-                className={`relative bg-white rounded-2xl shadow-xl overflow-hidden transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl ${
-                  pkg.popular ? 'ring-4 ring-purple-500 ring-opacity-50 scale-105' : ''
-                }`}
-                onMouseEnter={() => setActivePackage(pkg.id)}
-              >
-                {pkg.popular && (
-                  <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-center py-2 text-sm font-semibold">
-                    Most Popular
-                  </div>
-                )}
-                
-                <div className="p-8">
-                  <div className={`w-12 h-12 bg-gradient-to-r ${pkg.color} rounded-xl flex items-center justify-center mb-4 text-white`}>
-                    {pkg.icon}
-                  </div>
-                  
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{pkg.name}</h3>
-                  <p className="text-lg text-purple-600 font-semibold mb-4">{pkg.subtitle}</p>
-                  
-                  <div className="mb-6">
-                    <span className="text-4xl font-bold text-gray-900">{pkg.price}</span>
-                    <span className="text-gray-600 ml-2">starting</span>
-                  </div>
-                  
-                  <p className="text-gray-600 mb-6">{pkg.description}</p>
-                  
-                  <div className="space-y-3 mb-8">
-                    {pkg.features.map((feature, featureIndex) => (
-                      <div key={featureIndex} className="flex items-start">
-                        <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                        <span className="text-gray-700">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-                  
-                  <div className="mb-6 p-4 bg-gray-50 rounded-lg">
-                    <p className="text-sm text-gray-600">
-                      <strong>Ideal for:</strong> {pkg.ideal}
-                    </p>
-                  </div>
-                  
-                  <button 
-                    onClick={() => handlePackageSelect(pkg)}
-                    className={`w-full bg-gradient-to-r ${pkg.color} text-white py-3 px-6 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105`}
-                  >
-                    Choose {pkg.name}
-                  </button>
+
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            {packages.map((pkg) => (
+              <div key={pkg.id} className={`bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center text-center border-t-4 ${pkg.popular ? 'border-purple-600' : 'border-transparent'} hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1`}>
+                <div className={`w-16 h-16 bg-gradient-to-r ${pkg.color} rounded-full flex items-center justify-center mb-6 text-white`}>
+                  {pkg.icon}
                 </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">{pkg.name}</h3>
+                <p className="text-gray-600 mb-4">{pkg.subtitle}</p>
+                <p className="text-4xl font-bold text-gray-900 mb-6">{pkg.price}</p>
+                <ul className="text-gray-700 text-left w-full mb-8 space-y-3">
+                  {pkg.features.map((feature, i) => (
+                    <li key={i} className="flex items-start">
+                      <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <button
+                  onClick={() => handlePackageSelect(pkg)}
+                  className={`mt-auto w-full py-3 rounded-lg font-semibold text-lg transition-all duration-300 ${pkg.popular ? 'bg-purple-600 text-white hover:bg-purple-700' : 'bg-gray-200 text-gray-800 hover:bg-gray-300'}`}
+                >
+                  Select {pkg.name}
+                </button>
               </div>
             ))}
           </div>
-          
-          {/* Custom Solutions */}
-          <div className="text-center bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl p-8 text-white">
-            <h3 className="text-2xl font-bold mb-4">Need Something Custom?</h3>
-            <p className="text-lg mb-6 max-w-2xl mx-auto">
-              For unique projects, extensive product catalogs, or specific requirements, we offer fully customized solutions tailored to your vision.
-            </p>
-            <button 
+
+          <div className="text-center">
+            <button
               onClick={handleCustomQuote}
-              className="inline-flex items-center bg-white text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+              className="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
             >
-              Get Custom Quote
-              <ArrowRight className="ml-2 w-5 h-5" />
+              Request Custom Quote
             </button>
           </div>
         </div>
       </section>
 
-      {/* Enhanced CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-700 text-white relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-10 left-10 w-72 h-72 bg-yellow-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-          <div className="absolute bottom-10 right-10 w-72 h-72 bg-pink-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse delay-1000"></div>
-        </div>
-        
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Dominate Amazon?</h2>
-          <p className="text-xl mb-8 max-w-3xl mx-auto leading-relaxed">
-            Don't let your products get lost in the crowd. Partner with H.BNS LLC to unlock your full Amazon potential with our SEO-optimized copywriting and captivating brand storefront designs.
+      {/* Quote Form Section */}
+      {showQuoteForm && (
+        <section id="quote" className="py-20 bg-white">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">
+                {isCustomQuote ? "Request Your Custom Quote" : `Get a Quote for ${selectedPackage?.name}`}
+              </h2>
+              <p className="text-lg text-gray-600">
+                Fill out the form below and we'll get back to you within 24 hours.
+              </p>
+            </div>
+
+            <form name="amazon-services-quote" method="POST" data-netlify="true" className="space-y-6">
+              <input type="hidden" name="form-name" value="amazon-services-quote" />
+              
+              {selectedPackage && (
+                <div className="mb-6 p-4 bg-blue-50 border-l-4 border-blue-500 text-blue-800 rounded-lg">
+                  <p className="font-semibold">Selected Package: {selectedPackage.name}</p>
+                  <p>Price: {calculatePrice(selectedPackage.price)}</p>
+                  {isCustomQuote && (
+                    <p className="text-sm mt-2">You've selected a custom quote. Please provide details below.</p>
+                  )}
+                </div>
+              )}
+
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  autoComplete="name"
+                  required
+                  className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  autoComplete="email"
+                  required
+                  className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="business" className="block text-sm font-medium text-gray-700">Business Name (Optional)</label>
+                <input
+                  type="text"
+                  name="business"
+                  id="business"
+                  className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+              </div>
+
+              {!isCustomQuote && selectedPackage && (
+                <div>
+                  <label htmlFor="productCount" className="block text-sm font-medium text-gray-700">Number of ASINs/Products</label>
+                  <input
+                    type="number"
+                    name="productCount"
+                    id="productCount"
+                    min="1"
+                    value={productCount}
+                    onChange={(e) => setProductCount(e.target.value)}
+                    required
+                    className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  />
+                </div>
+              )}
+
+              <div>
+                <label htmlFor="timeline" className="block text-sm font-medium text-gray-700">Preferred Timeline</label>
+                <select
+                  id="timeline"
+                  name="timeline"
+                  value={timeline}
+                  onChange={(e) => handleTimelineChange(e.target.value)}
+                  className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                >
+                  <option value="1week">Standard (1-2 weeks)</option>
+                  <option value="2weeks">Extended (2-4 weeks)</option>
+                  <option value="asap">ASAP (1-3 days) - 50% Rush Fee</option>
+                </select>
+              </div>
+
+              <div>
+                <label htmlFor="details" className="block text-sm font-medium text-gray-700">Project Details</label>
+                <textarea
+                  id="details"
+                  name="details"
+                  rows="5"
+                  required
+                  className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+              >
+                Submit Quote Request
+              </button>
+            </form>
+          </div>
+        </section>
+      )}
+
+      {/* Call to Action */}
+      <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-center">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+            Ready to Dominate Your Amazon Niche?
+          </h2>
+          <p className="text-xl md:text-2xl mb-8 leading-relaxed">
+            Let H.BNS LLC transform your Amazon presence with expert SEO copywriting and stunning brand storefront design.
           </p>
-          <a href="#quote" className="inline-flex items-center bg-gradient-to-r from-yellow-400 to-orange-400 text-black px-8 py-4 rounded-lg font-semibold text-lg hover:from-yellow-300 hover:to-orange-300 transition-all duration-300 transform hover:scale-105 shadow-lg">
-            Get Your Free Quote Today!
-            <ArrowRight className="ml-2 w-5 h-5" />
+          <a href="#quote" className="bg-white text-purple-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-200 transition-all duration-300 transform hover:scale-105 shadow-lg">
+            Get Your Free Consultation
           </a>
         </div>
       </section>
 
-      {/* Enhanced Quote Form Section - Only show when package is selected */}
-      {showQuoteForm && (
-        <section id="quote" className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                Complete Your {selectedPackage?.name} Order
-              </h2>
-              <p className="text-xl text-gray-600">
-                You've selected the {selectedPackage?.name} - {selectedPackage?.subtitle}
-              </p>
-              {asapPricing && (
-                <div className="mt-4 p-4 bg-orange-100 border border-orange-300 rounded-lg">
-                  <p className="text-orange-800 font-semibold">
-                    🚀 ASAP Rush Order: {calculatePrice(selectedPackage?.price)} (50% rush fee applied)
-                  </p>
-                </div>
-              )}
-            </div>
-            
-            <div className="bg-white rounded-2xl shadow-2xl p-8 lg:p-12">
-              <form className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                      Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-                      placeholder="Your full name"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-                      placeholder="your@email.com"
-                    />
-                  </div>
-                </div>
-                
-                <div>
-                  <label htmlFor="business" className="block text-sm font-medium text-gray-700 mb-2">
-                    Business/Brand Name
-                  </label>
-                  <input
-                    type="text"
-                    id="business"
-                    name="business"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-                    placeholder="Your business or brand name"
-                  />
-                </div>
-                
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="package" className="block text-sm font-medium text-gray-700 mb-2">
-                      Selected Package *
-                    </label>
-                    <input
-                      type="text"
-                      id="package"
-                      name="package"
-                      value={`${selectedPackage?.name} (${asapPricing ? calculatePrice(selectedPackage?.price) : selectedPackage?.price})`}
-                      readOnly
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-700"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="products" className="block text-sm font-medium text-gray-700 mb-2">
-                      Number of Products/ASINs
-                    </label>
-                    <input
-                      type="number"
-                      id="products"
-                      name="products"
-                      min="1"
-                      value={productCount}
-                      onChange={(e) => setProductCount(parseInt(e.target.value) || 1)}
-                      readOnly={!isCustomQuote}
-                      className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 ${!isCustomQuote ? 'bg-gray-50 text-gray-700' : ''}`}
-                      placeholder="How many products need optimization?"
-                    />
-                    {!isCustomQuote && (
-                      <p className="text-xs text-gray-500 mt-1">
-                        Based on selected package. For custom quantities, use "Get Custom Quote"
-                      </p>
-                    )}
-                  </div>
-                </div>
-                
-                <div>
-                  <label htmlFor="timeline" className="block text-sm font-medium text-gray-700 mb-2">
-                    Project Timeline *
-                  </label>
-                  <select
-                    id="timeline"
-                    name="timeline"
-                    value={timeline}
-                    onChange={(e) => handleTimelineChange(e.target.value)}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-                  >
-                    <option value="1week">Within 1 week (Standard)</option>
-                    <option value="asap">ASAP - Rush Order (+50% fee)</option>
-                  </select>
-                </div>
-                
-                <div>
-                  <label htmlFor="details" className="block text-sm font-medium text-gray-700 mb-2">
-                    Project Details & Goals
-                  </label>
-                  <textarea
-                    id="details"
-                    name="details"
-                    rows={4}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-                    placeholder="Tell us about your products, target audience, current challenges, and what you hope to achieve..."
-                  ></textarea>
-                </div>
-                
-                <div className="text-center">
-                  <button
-                    type="submit"
-                    className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
-                  >
-                    Complete Order - {asapPricing ? calculatePrice(selectedPackage?.price) : selectedPackage?.price}
-                  </button>
-                  <p className="text-sm text-gray-500 mt-3">
-                    We'll respond within 24 hours with a detailed proposal
-                  </p>
-                  <button
-                    type="button"
-                    onClick={() => setShowQuoteForm(false)}
-                    className="mt-4 text-gray-500 hover:text-gray-700 underline"
-                  >
-                    ← Back to Packages
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </section>
-      )}
+      {/* Footer */}
+      <footer className="bg-gray-800 text-white py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p>&copy; {new Date().getFullYear()} H.BNS LLC. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   );
 };
 
 export default AmazonServices;
+
 
