@@ -357,50 +357,45 @@ const AmazonServices = () => {
         </div>
       </section>
 
-      {/* Pricing Packages Section */}
-      <section id="packages" className="py-20 bg-gray-100">
+      {/* Flexible Pricing Packages Section */}
+      <section id="packages" className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               Flexible Pricing Packages
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600">
               Choose the perfect plan to elevate your Amazon presence, from single ASIN optimization to comprehensive brand solutions.
             </p>
           </div>
-
+          
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {packages.map((pkg) => (
-              <div
-                key={pkg.id}
-                className={`relative bg-white rounded-2xl shadow-xl p-8 flex flex-col justify-between border-2 ${pkg.popular ? 'border-purple-500' : 'border-gray-200'} transform transition-all duration-300 hover:scale-105`}
-              >
+              <div key={pkg.id} className={`relative bg-white rounded-2xl shadow-xl p-8 border-2 ${pkg.popular ? 'border-purple-500' : 'border-gray-100'} transform hover:scale-105 transition-all duration-300`}>
                 {pkg.popular && (
-                  <span className="absolute top-0 right-0 bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-2xl">
-                    Most Popular
-                  </span>
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-full">Most Popular</div>
                 )}
-                <div>
-                  <div className={`w-16 h-16 bg-gradient-to-r ${pkg.color} rounded-full flex items-center justify-center mx-auto mb-6`}>
-                    {pkg.icon}
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2 text-center">{pkg.name}</h3>
-                  <p className="text-gray-500 text-center mb-4">{pkg.subtitle}</p>
-                  <p className="text-4xl font-bold text-gray-900 mb-6 text-center">{pkg.price}</p>
-                  <p className="text-gray-600 text-center mb-6">{pkg.description}</p>
-                  <ul className="space-y-3 mb-8">
-                    {pkg.features.map((feature, i) => (
-                      <li key={i} className="flex items-center text-gray-700">
-                        <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
+                <div className={`w-16 h-16 bg-gradient-to-r ${pkg.color} rounded-full flex items-center justify-center mx-auto mb-6`}>
+                  {pkg.icon}
                 </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">{pkg.name}</h3>
+                <p className="text-gray-600 mb-4">{pkg.subtitle}</p>
+                <div className="text-5xl font-bold text-gray-900 mb-6">{pkg.price}</div>
+                <p className="text-gray-600 mb-6">{pkg.description}</p>
+                
+                <ul className="space-y-3 mb-8">
+                  {pkg.features.map((feature, i) => (
+                    <li key={i} className="flex items-center text-gray-700">
+                      <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                
                 <button
                   onClick={() => handlePackageSelect(pkg)}
                   className={`w-full py-3 rounded-lg font-semibold text-lg transition-all duration-300
-                    ${pkg.popular ? 'bg-purple-600 text-white hover:bg-purple-700' : 'bg-gray-200 text-gray-800 hover:bg-gray-300'}`}
+                    ${pkg.popular ? 'bg-purple-600 text-white hover:bg-purple-700' : 'border-2 border-gray-300 text-gray-800 hover:bg-gray-100'}`}
                 >
                   Select {pkg.name}
                 </button>
@@ -411,21 +406,20 @@ const AmazonServices = () => {
       </section>
 
       {/* Custom Solution Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+      <section id="custom-solution" className="py-20 bg-gradient-to-r from-blue-700 to-indigo-800 text-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             Need Something Custom?
           </h2>
-          <p className="text-xl md:text-2xl mb-8 leading-relaxed">
-            For unique projects, extensive product catalogs, or specific requirements, we offer
-            fully customized solutions tailored to your vision.
+          <p className="text-xl text-blue-100 mb-8 leading-relaxed">
+            For unique projects, extensive product catalogs, or specific requirements, we offer fully customized solutions tailored to your vision.
           </p>
           <button
             onClick={handleCustomQuote}
-            className="group bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg"
+            className="inline-flex items-center bg-white text-blue-700 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg"
           >
             Request Custom Quote
-            <ArrowRight className="inline-block ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="inline-block ml-2 w-5 h-5" />
           </button>
         </div>
       </section>
@@ -437,15 +431,15 @@ const AmazonServices = () => {
             <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
               {isCustomQuote ? "Complete Your Custom Solution Order" : `Complete Your ${selectedPackage?.name} Order`}
             </h2>
-            <form name="amazon-services-quote" method="POST" data-netlify="true" netlify-honeypot="bot-field" className="space-y-6">
-              <input type="hidden" name="form-name" value="amazon-services-quote" />
-              <input type="hidden" name="package-name" value={selectedPackage?.name || "Custom Solution"} />
+            <form name="amazon-services" method="POST" data-netlify="true" netlify-honeypot="bot-field" className="space-y-6">
+              <input type="hidden" name="form-name" value="amazon-services" />
+              <input type="hidden" name="package-name" value={selectedPackage?.name} /> {/* Hidden field for package name */}
               <p className="hidden">
                 <label>
                   Don’t fill this out if you’re human: <input name="bot-field" />
                 </label>
               </p>
-              
+
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
                 <input
@@ -456,7 +450,7 @@ const AmazonServices = () => {
                   className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
               </div>
-              
+
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
                 <input
@@ -469,11 +463,12 @@ const AmazonServices = () => {
               </div>
 
               <div>
-                <label htmlFor="businessName" className="block text-sm font-medium text-gray-700">Business Name (Optional)</label>
+                <label htmlFor="businessName" className="block text-sm font-medium text-gray-700">Business Name</label>
                 <input
                   type="text"
                   name="businessName"
                   id="businessName"
+                  required
                   className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
               </div>
@@ -484,9 +479,9 @@ const AmazonServices = () => {
                   type="text"
                   name="package"
                   id="package"
-                  value={selectedPackage?.name || ""}
+                  value={selectedPackage?.name || ''}
                   readOnly
-                  className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 cursor-not-allowed sm:text-sm"
+                  className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 sm:text-sm"
                 />
               </div>
 
@@ -497,22 +492,20 @@ const AmazonServices = () => {
                   name="asinCount"
                   id="asinCount"
                   value={productCount}
-                  readOnly={!isCustomQuote}
                   onChange={(e) => setProductCount(e.target.value)}
-                  className={`mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm ${!isCustomQuote ? 'bg-gray-100 cursor-not-allowed' : ''}`}
+                  readOnly={!isCustomQuote}
+                  className={`mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm ${!isCustomQuote ? 'bg-gray-100' : ''}`}
                 />
                 {!isCustomQuote && (
-                  <p className="mt-2 text-sm text-gray-500">
-                    Based on selected package. For custom quantities, use 'Request Custom Quote'
-                  </p>
+                  <p className="mt-2 text-sm text-gray-500">Based on selected package. For custom quantities, use 'Request Custom Quote'</p>
                 )}
               </div>
 
               <div>
-                <label htmlFor="timeline" className="block text-sm font-medium text-gray-700">Project Timeline</label>
+                <label htmlFor="timeline" className="block text-sm font-medium text-gray-700">Preferred Project Timeline</label>
                 <select
-                  name="timeline"
                   id="timeline"
+                  name="timeline"
                   value={timeline}
                   onChange={(e) => handleTimelineChange(e.target.value)}
                   className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
@@ -534,7 +527,7 @@ const AmazonServices = () => {
 
               <button
                 type="submit"
-                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-semibold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors duration-300"
               >
                 Hire Now
               </button>
@@ -544,52 +537,9 @@ const AmazonServices = () => {
       )}
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div>
-            <h3 className="text-xl font-bold mb-4">H.BNS LLC</h3>
-            <p className="text-gray-400 leading-relaxed">
-              Professional custom illustration services that bring your creative vision to life with
-              unparalleled artistry and attention to detail.
-            </p>
-          </div>
-          <div>
-            <h3 className="text-xl font-bold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Home</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Products</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Merch</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Support</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">FAQ</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Gumroad Store</a></li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-xl font-bold mb-4">Stay Connected</h3>
-            <p className="text-gray-400 mb-4">Get updates on new products and exclusive offers</p>
-            <form className="flex">
-              <input
-                type="email"
-                placeholder="Enter your email address"
-                className="w-full px-4 py-2 rounded-l-md bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <button type="submit" className="bg-blue-600 px-4 py-2 rounded-r-md hover:bg-blue-700 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-              </button>
-            </form>
-            <div className="mt-6">
-              <h3 className="text-xl font-bold mb-4">Follow Us</h3>
-              <a href="https://www.instagram.com/hbns_llc/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors mr-4">
-                Instagram
-              </a>
-              {/* Add other social media links as needed */}
-            </div>
-          </div>
-        </div>
-        <div className="text-center text-gray-500 mt-12 text-sm">
-          &copy; 2023 H.BNS LLC. All rights reserved. Crafted with ❤️ for creative minds.
+      <footer className="bg-gray-800 text-white py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p>&copy; {new Date().getFullYear()} H.BNS LLC. All rights reserved.</p>
         </div>
       </footer>
     </div>
