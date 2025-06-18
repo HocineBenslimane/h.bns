@@ -7,7 +7,7 @@ const AmazonServices = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState(null);
   const [showQuoteForm, setShowQuoteForm] = useState(false);
-  const [timeline, setTimeline] = useState('Standard (1-2 weeks)');
+  const [timeline, setTimeline] = useState('Standard (1 week guarantee)');
   const [asapPricing, setAsapPricing] = useState(false);
   const [isCustomQuote, setIsCustomQuote] = useState(false);
   const [productCount, setProductCount] = useState(1);
@@ -28,7 +28,7 @@ const AmazonServices = () => {
   const handlePackageSelect = (pkg) => {
     setSelectedPackage(pkg);
     setShowQuoteForm(true);
-    setTimeline('Standard (1-2 weeks)'); // Default to Standard
+    setTimeline('Standard (1 week guarantee)'); // Default to Standard
     setAsapPricing(false);
     setIsCustomQuote(false);
     
@@ -53,14 +53,14 @@ const AmazonServices = () => {
     
     setSelectedPackage(customPackage);
     setShowQuoteForm(true);
-    setTimeline('Standard (1-2 weeks)');
+    setTimeline('Standard (1 week guarantee)');
     setAsapPricing(false);
     setIsCustomQuote(true);
     setProductCount(1); // Default to 1, but user can change
     
     // Scroll to form
     setTimeout(() => {
-      document.getElementById('quote')?.scrollIntoView({ behavior: 'smooth' });
+      document.getElementById('custom-quote-form')?.scrollIntoView({ behavior: 'smooth' });
     }, 100);
   };
 
@@ -80,7 +80,7 @@ const AmazonServices = () => {
   const calculatePrice = (basePrice) => {
     if (!asapPricing || basePrice === "Custom Pricing") return basePrice;
     const numericPrice = parseInt(basePrice.replace('$', ''));
-    const rushPrice = Math.round(numericPrice * 1.5); // 50% increase for ASAP
+    const rushPrice = Math.round(numericPrice * 1.5);
     return `$${rushPrice}`;
   };
 
@@ -399,41 +399,26 @@ const AmazonServices = () => {
                 </button>
               </div>
             ))}
-            
-            {/* Custom Quote Card */}
-            <div className="relative bg-white rounded-2xl shadow-xl p-8 flex flex-col justify-between transform transition-all duration-300 hover:scale-102 hover:shadow-2xl">
-              <div>
-                <div className="w-16 h-16 bg-gradient-to-r from-gray-400 to-gray-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                  </svg>
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2 text-center">Custom Solution</h3>
-                <p className="text-gray-600 text-center mb-4">Tailored to Your Unique Needs</p>
-                <p className="text-5xl font-bold text-gray-900 text-center mb-6">Custom Pricing</p>
-                <ul className="space-y-3 mb-8">
-                  <li className="flex items-center text-gray-700">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
-                    Personalized strategy and deliverables
-                  </li>
-                  <li className="flex items-center text-gray-700">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
-                    Flexible scope and pricing
-                  </li>
-                  <li className="flex items-center text-gray-700">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
-                    Dedicated expert consultation
-                  </li>
-                </ul>
-              </div>
-              <button
-                onClick={handleCustomQuote}
-                className="w-full py-3 rounded-lg font-semibold text-lg bg-gradient-to-r from-gray-600 to-gray-800 text-white shadow-lg hover:from-gray-500 hover:to-gray-700 transition-all duration-300"
-              >
-                Request Custom Quote
-              </button>
-            </div>
           </div>
+        </div>
+      </section>
+
+      {/* Custom Quote Section (moved outside packages grid) */}
+      <section className="py-20 bg-gray-900 text-white text-center">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+            Need Something Custom?
+          </h2>
+          <p className="text-xl md:text-2xl mb-8">
+            For unique projects, extensive product catalogs, or specific requirements, we offer fully customized solutions tailored to your vision.
+          </p>
+          <button
+            onClick={handleCustomQuote}
+            className="inline-block bg-white text-gray-900 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg"
+          >
+            Get Custom Quote
+            <ArrowRight className="inline-block ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </button>
         </div>
       </section>
 
@@ -457,6 +442,11 @@ const AmazonServices = () => {
                   Don’t fill this out if you’re human: <input name="bot-field" />
                 </label>
               </div>
+
+              {/* Hidden input for package name */}
+              {selectedPackage && (
+                <input type="hidden" name="package-name" value={selectedPackage.name} />
+              )}
 
               {selectedPackage && !isCustomQuote && (
                 <div className="bg-blue-50 border-l-4 border-blue-400 text-blue-800 p-4 rounded-md mb-6">
@@ -524,7 +514,7 @@ const AmazonServices = () => {
                   required
                   className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-lg"
                 >
-                  <option value="Standard (1-2 weeks)">Standard (1-2 weeks)</option>
+                  <option value="Standard (1 week guarantee)">Standard (1 week guarantee)</option>
                   <option value="ASAP (1-3 days) - 50% Rush Fee">ASAP (1-3 days) - 50% Rush Fee</option>
                 </select>
               </div>
