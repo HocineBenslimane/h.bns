@@ -1,55 +1,72 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Netlify Forms Detection</title>
+  <title>Static Forms for Netlify</title>
 </head>
 <body>
-    <!-- This file helps Netlify detect forms during build time -->
-    
-    <!-- Starter Package Form -->
-    <form name="amazon-services-starter-package" netlify netlify-honeypot="bot-field" hidden>
-        <input type="text" name="name" />
-        <input type="email" name="email" />
-        <input type="text" name="businessName" />
-        <input type="number" name="asinCount" />
-        <input type="text" name="timeline" />
-        <input type="url" name="amazonUrl" />
-        <textarea name="projectDetails"></textarea>
-        <input type="hidden" name="package" />
-        <input type="hidden" name="form-name" value="amazon-services-starter-package" />
-        <input name="bot-field" />
-    </form>
-    
-    <!-- Growth Package Form -->
-    <form name="amazon-services-growth-package" netlify netlify-honeypot="bot-field" hidden>
-        <input type="text" name="name" />
-        <input type="email" name="email" />
-        <input type="text" name="businessName" />
-        <input type="number" name="asinCount" />
-        <input type="text" name="timeline" />
-        <textarea name="productUrls"></textarea>
-        <textarea name="brandInfo"></textarea>
-        <textarea name="projectDetails"></textarea>
-        <input type="hidden" name="package" />
-        <input type="hidden" name="form-name" value="amazon-services-growth-package" />
-        <input name="bot-field" />
-    </form>
-    
-    <!-- Elite Package Form -->
-    <form name="amazon-services-elite-package" netlify netlify-honeypot="bot-field" hidden>
-        <input type="text" name="name" />
-        <input type="email" name="email" />
-        <input type="text" name="businessName" />
-        <input type="number" name="asinCount" />
-        <input type="text" name="timeline" />
-        <textarea name="productUrls"></textarea>
-        <textarea name="brandInfo"></textarea>
-        <textarea name="competitorInfo"></textarea>
-        <textarea name="projectDetails"></textarea>
-        <input type="hidden" name="package" />
-        <input type="hidden" name="form-name" value="amazon-services-elite-package" />
-        <input name="bot-field" />
-    </form>
+  <!-- This file helps Netlify detect forms during build -->
+  
+  <!-- Homepage Contact Form -->
+  <form name="homepage-contact" netlify netlify-honeypot="bot-field" hidden>
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <input type="tel" name="phone" />
+  </form>
+
+  <!-- Amazon Services Forms -->
+  <form name="amazon-services-starter" netlify netlify-honeypot="bot-field" hidden>
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <input type="text" name="businessName" />
+    <input type="number" name="asinCount" />
+    <input type="text" name="timeline" />
+    <input type="url" name="amazonUrl" />
+    <textarea name="projectDetails"></textarea>
+    <input type="text" name="package" />
+  </form>
+
+  <form name="amazon-services-growth" netlify netlify-honeypot="bot-field" hidden>
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <input type="text" name="businessName" />
+    <input type="number" name="asinCount" />
+    <input type="text" name="timeline" />
+    <textarea name="productUrls"></textarea>
+    <textarea name="brandInfo"></textarea>
+    <textarea name="projectDetails"></textarea>
+    <input type="text" name="package" />
+  </form>
+
+  <form name="amazon-services-elite" netlify netlify-honeypot="bot-field" hidden>
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <input type="text" name="businessName" />
+    <input type="number" name="asinCount" />
+    <input type="text" name="timeline" />
+    <textarea name="productUrls"></textarea>
+    <textarea name="brandInfo"></textarea>
+    <textarea name="competitorInfo"></textarea>
+    <textarea name="projectDetails"></textarea>
+    <input type="text" name="package" />
+  </form>
+
+  <!-- Quote Request Form -->
+  <form name="quote-request" netlify netlify-honeypot="bot-field" hidden>
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <input type="tel" name="phone" />
+    <input type="text" name="projectType" />
+    <input type="text" name="budget" />
+    <input type="text" name="timeline" />
+    <textarea name="description"></textarea>
+  </form>
+
+  <!-- Support Contact Form -->
+  <form name="support-contact" netlify netlify-honeypot="bot-field" hidden>
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <input type="text" name="subject" />
+    <textarea name="message"></textarea>
+  </form>
 </body>
 </html>
-

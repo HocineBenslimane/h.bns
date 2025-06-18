@@ -4,13 +4,16 @@ import { useState } from 'react'
 import Navigation from './components/Navigation'
 import Hero from './components/Hero'
 import Products from './components/Products'
+import ProductsOverview from './components/ProductsOverview'
 import CustomDesigner from './components/CustomDesigner'
 import Support from './components/Support'
+import SupportOverview from './components/SupportOverview'
 import FAQ from './components/FAQ'
 import Policies from './components/Policies'
 import Legal from './components/Legal'
 import PaymentTerms from './components/PaymentTerms'
 import QuoteForm from './components/QuoteForm'
+import QuoteFormOverview from './components/QuoteFormOverview'
 import Merch from './components/Merch' // Import the new Merch component
 import AmazonServices from './components/AmazonServices' // Import the new Amazon Services component
 import Footer from './components/Footer'
@@ -352,9 +355,9 @@ function App() {
         <Route path="/" element={
           <>
             <Hero />
-            <Products />
-            <Support />
-            <QuoteForm />
+            <ProductsOverview />
+            <SupportOverview />
+            <QuoteFormOverview />
           </>
         } />
         <Route path="/products" element={<Products />} />
