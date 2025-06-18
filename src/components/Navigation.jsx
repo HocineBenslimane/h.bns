@@ -76,7 +76,7 @@ const Navigation = () => {
             </DropdownMenu>
 
             <Button asChild>
-              <Link to="/get-a-quote">Get Quote</Link>
+              <Link to="/quote">Get Quote</Link>
             </Button>
           </div>
 
@@ -132,7 +132,7 @@ const Navigation = () => {
               
               <div className="px-3 py-2 border-t mt-2">
                 <Button asChild className="w-full">
-                  <Link to="/get-a-quote" onClick={() => setIsOpen(false)}>Get Quote</Link>
+                  <Link to="/quote" onClick={() => setIsOpen(false)}>Get Quote</Link>
                 </Button>
               </div>
             </div>

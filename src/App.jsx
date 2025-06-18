@@ -357,7 +357,6 @@ function App() {
             <Hero />
             <ProductsOverview />
             <SupportOverview />
-            <QuoteFormOverview />
           </>
         } />
         <Route path="/products" element={<Products />} />
