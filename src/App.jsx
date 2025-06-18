@@ -352,13 +352,7 @@ function App() {
     <Router>
       <Navigation />
       <Routes>
-        <Route path="/" element={
-          <>
-            <Hero />
-            <ProductsOverview />
-            <SupportOverview />
-          </>
-        } />
+        <Route path="/" element={<Hero />} />
         <Route path="/products" element={<Products />} />
         <Route path="/merch" element={<Merch />} />
         <Route path="/custom-designer" element={<CustomDesigner />} />

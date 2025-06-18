@@ -45,7 +45,7 @@ const Hero = () => {
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button size="lg" className="group bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-700" asChild>
-                  <Link to="/get-a-quote">
+                  <Link to="/quote">
                     Get Your Free Quote
                     <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                   </Link>
@@ -176,7 +176,7 @@ const Hero = () => {
                 className="bg-white text-primary hover:bg-gray-100 font-bold py-4 px-8 rounded-full shadow-lg transform transition-all hover:scale-105 group"
                 asChild
               >
-                <Link to="/get-a-quote">
+                <Link to="/quote">
                   <Sparkles className="mr-2 h-5 w-5" />
                   Get Your Free Quote
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
